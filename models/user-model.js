@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-
-mongoose.connect("mongodb://127.0.0.1:27017/bagshop");
-
-
 const userSchema= mongoose.Schema({
 
-    username:String,
+    username:{
+        type:String,
+        minLenght:2,
+        trim:true,
+    },
     email:String,
     password:String,
     cart:{
