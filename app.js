@@ -11,13 +11,13 @@ app.use(express.static(path.join(__dirname , "public")))
 const ownersRouter=require('./routes/owenrsRouter');
 const usersRouter=require('./routes/usersRouter');
 const productsRouter=require('./routes/productsRouter');
+const indexRouter=require('./routes/indexRouter')
+require("dotenv").config();
 
 
 app.set('view engine','ejs');
 
-
-
-
+app.use('/', indexRouter)
 app.use('/owners', ownersRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
