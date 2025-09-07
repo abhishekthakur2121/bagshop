@@ -16,6 +16,13 @@ require("dotenv").config();
 
 
 app.set('view engine','ejs');
+// app.use((req, res, next) => {
+//   console.log("🟢 Method:", req.method);
+//   console.log("🟢 URL:", req.originalUrl);
+//   console.log("🟢 Headers:", req.headers);
+//   console.log("🟢 Body:", req.body);
+//   next();
+// });
 
 app.use('/', indexRouter)
 app.use('/owners', ownersRouter);
