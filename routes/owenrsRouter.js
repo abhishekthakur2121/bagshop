@@ -30,6 +30,12 @@ router.get('/admin', (req, res) => {
 });
 
 
+// app.get('/footer', (req, res) => {
+
+//   res.render('contact'); // or 'footer', depending on the filename
+// });
+
+
 // if(process.env==="development")
 
 

@@ -12,10 +12,10 @@ const userSchema= mongoose.Schema({
         type:Array,
         default:[]
     },
-    order:{
-        type:Array,
-        default:[]
-    },
+    order:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"product"
+    }],
     contact:Number,
     picture:String
 

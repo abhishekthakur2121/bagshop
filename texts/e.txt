@@ -1,0 +1,8 @@
+  <!-- <div class="w-full h-80 flex justify-center items-center bg-[<%= user.cart[0].bgcolor %>]">
+                <img class="h-[18rem]" 
+                     src="data:image/jpeg;base64,<%= user.cart[0].image.toString('base64') %>" 
+                        alt="">
+                </div> -->
+
+
+                
