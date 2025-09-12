@@ -1,19 +1,23 @@
 <%- include('./partials/header') %>
 
 <!-- Alerts -->
-<% if (error && error.length > 0) { %>
-  <div class="relative w-full max-w-md mx-auto p-4 mb-6 bg-red-50 border-l-4 border-red-600 text-red-800 rounded-lg shadow-lg flex items-center justify-between animate-fadeIn">
-    <span class="font-semibold"><%= error[0] %></span>
-    <button onclick="this.parentElement.style.display='none'" class="ml-4 text-red-600 font-bold hover:text-red-800 transition">&times;</button>
-  </div>
-<% } %>
+<!-- Flash Messages Centered & Shrink-to-Text -->
+<div class="fixed top-16 left-1/2 transform -translate-x-1/2 z-50">
+  <% if (error && error.length > 0) { %>
+    <div class="inline-block p-4 mb-4 bg-red-50 border-l-4 border-red-600 text-red-800 rounded-lg shadow-lg flex items-center justify-between animate-fadeIn">
+      <span class="font-semibold"><%= error[0] %></span>
+      <button onclick="this.parentElement.style.display='none'" class="ml-4 text-red-600 font-bold hover:text-red-800 transition">&times;</button>
+    </div>
+  <% } %>
 
-<% if (success && success.length > 0) { %>
-  <div class="relative w-full max-w-xl mx-auto p-4 mb-6 bg-green-50 border-l-4 border-green-600 text-green-800 rounded-lg shadow-lg flex items-center justify-between animate-fadeIn">
-    <span class="font-semibold"><%= success[0] %></span>
-    <button onclick="this.parentElement.style.display='none'" class="ml-4 text-green-600 font-bold hover:text-green-800 transition">&times;</button>
-  </div>
-<% } %>
+  <% if (success && success.length > 0) { %>
+    <div class="inline-block p-4 mb-4 bg-green-50 border-l-4 border-green-600 text-green-800 rounded-lg shadow-lg flex items-center justify-between animate-fadeIn">
+      <span class="font-semibold"><%= success[0] %></span>
+      <button onclick="this.parentElement.style.display='none'" class="ml-4 text-green-600 font-bold hover:text-green-800 transition">&times;</button>
+    </div>
+  <% } %>
+</div>
+
 
 <!-- Main Section -->
 <div class="w-full min-h-screen flex flex-col md:flex-row px-6 md:px-20 py-12 gap-12 bg-gradient-to-r from-blue-50 via-white to-pink-50">

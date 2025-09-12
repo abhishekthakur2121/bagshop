@@ -4,6 +4,7 @@ const isLoggedin=require('../middlewares/isLoggedin');
 const productModel = require('../models/product-model');
 const userModel = require('../models/user-model');
 
+
 router.get('/', (req, res) => {
   let error = req.flash("error");
   let success = req.flash("success");
@@ -15,13 +16,16 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/cart',isLoggedin , async (req, res) => {
+router.get('/cart', isLoggedin, async function(req, res) {
+  let user = await userModel
+    .findOne({ email: req.user.email })
+    .populate("cart");
 
-   let user= await userModel
-  .findOne({email: req.user.email})
-  .populate("cart")
-   res.render("cart",{user})
+  let loggedin = req.cookies.token ? true : false; // <--- add this
+
+  res.render("cart", { user, loggedin });
 });
+
 
 router.get('/addtocart/:productid', isLoggedin, async (req, res) => {
   try {
@@ -47,6 +51,37 @@ router.get('/addtocart/:productid', isLoggedin, async (req, res) => {
   }
 });
 
+// Remove single item
+router.post('/cart/remove/:id', isLoggedin, async (req, res) => {
+  try {
+    await userModel.updateOne(
+      { email: req.user.email },
+      { $pull: { cart: req.params.id } }
+    );
+    req.flash("success", "Item removed from cart");
+    res.redirect('/cart');
+  } catch (err) {
+    console.error(err);
+    req.flash("error", "Could not remove item");
+    res.redirect('/cart');
+  }
+});
+
+// Remove all items
+router.post('/cart/remove-all', isLoggedin, async (req, res) => {
+  try {
+    await userModel.updateOne(
+      { email: req.user.email },
+      { $set: { cart: [] } }
+    );
+    req.flash("success", "All items removed");
+    res.redirect('/cart');
+  } catch (err) {
+    console.error(err);
+    req.flash("error", "Could not clear cart");
+    res.redirect('/cart');
+  }
+});
 
 
 // Shop Page

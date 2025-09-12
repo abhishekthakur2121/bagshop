@@ -29,6 +29,13 @@ app.use('/owners', ownersRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 
+app.use((req, res, next) => {
+  res.locals.loggedin = !!req.user;   // true if logged in
+  res.locals.user = req.user || null; // full user object
+  next();
+});
+
+
 app.listen(5000,()=>{
     console.log('running at port number 5000')
 })
